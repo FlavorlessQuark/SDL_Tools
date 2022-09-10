@@ -1,11 +1,20 @@
 #ifndef SDLX_MACRO
 # define SDLX_MACRO
 
+# define DEFAULT_SDL_FLAG 0
+# define DEFAULT_WIN_NAME "Default"
+# define DEFAULT_WIN_X SDL_WINDOWPOS_CENTERED
+# define DEFAULT_WIN_Y SDL_WINDOWPOS_CENTERED
+# define DEFAULT_WIN_H 500
+# define DEFAULT_WIN_W 500
+
 // Render queue macros
+
 # define DEFAULT_QUEUES_COUNT 2
 # define DEFAULT_QUEUE_SIZE 5
 
 // Frame and update macros
+
 # define FPS 60
 # define FRAME_TIME 1000 / FPS
 # define UPDATE_LEN_MS 10
@@ -23,6 +32,19 @@ enum {
 	SDLX_LEFT_ALIGN,
 	SDLX_TOP_ALIGN,
 	SDLX_BOTTOM_ALIGN
+};
+
+enum {
+	SDLX_MOUSETYPE,
+	SDLX_KEYBOARDTYPE,
+	SDLX_CONTROLLERTYPE
+};
+
+enum {
+	SDLX_NONE = 0,
+	SDLX_KEYDOWN,
+	SDLX_KEYUP,
+	SDLX_KEYHELD
 };
 
 

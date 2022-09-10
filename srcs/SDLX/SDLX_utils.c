@@ -2,7 +2,7 @@
 
 static SDLX_Time _intern_time;
 
-void		SDLX_Sprite_Create(SDLX_Sprite *dest, uint32_t layer, SDL_Texture *texture)
+void		SDLX_SpriteCreate(SDLX_Sprite *dest, uint32_t layer, SDL_Texture *texture)
 {
 	SDL_memset(dest, 0, sizeof(SDLX_Sprite));
 	if (dest == NULL)
@@ -16,7 +16,7 @@ void		SDLX_Sprite_Create(SDLX_Sprite *dest, uint32_t layer, SDL_Texture *texture
 	dest->flip = SDL_FLIP_NONE;
 }
 
-SDL_Texture	*SDLX_Texture_Load(char *path, SDLX_Display *display)
+SDL_Texture	*SDLX_TextureLoad(char *path, SDLX_Display *display)
 {
 	return 	SDL_CreateTextureFromSurface(display->renderer, IMG_Load(path));
 }
@@ -70,5 +70,5 @@ void SDLX_CapFPS()
 	start = SDL_GetTicks();
 }
 
-SDLX_Time SDLX_Time_Get(void) {return _intern_time;}
+SDLX_Time SDLX_TimeGet(void) {return _intern_time;}
 

@@ -1,8 +1,8 @@
 /**
  *  FILE: SDLX_structs.h
- *  AUTHOR: 
+ *  AUTHOR:
 		FlavorlessQuark
- *  CONTENTS: 
+ *  CONTENTS:
 		Structures used within SDLX
  *  CREATION: 2022-05-10 16:47:11
  *  MODIFIED: 2022-05-10 23:29:14
@@ -10,7 +10,7 @@
 
 #ifndef SDLX_STRUCT_H
 # define SDLX_STRUCT_H
-    
+
 #include "SDL2/SDL.h"
 
 typedef struct SDLX_Display
@@ -44,11 +44,11 @@ typedef struct SDLX_Sprite
     SDL_Rect *dst;
     SDL_Rect _src;
     SDL_Rect *src;
-    
+
     SDL_Texture *texture;
     SDL_Point   *center;
     SDL_Point   _center;
-    
+
     SDL_RendererFlip    flip;
 
     double      angle;
@@ -59,14 +59,17 @@ typedef struct SDLX_RenderQueue
     uint64_t    capacity;
     uint64_t    size;
 
-    SDL_bool    is_sorting_queue;
+    SDL_bool    is_sorted_queue;
     SDLX_Sprite **sprites;
-}   SDLX_RenderQueue;       
+}   SDLX_RenderQueue;
 
 typedef struct SDLX_Input
 {
     SDL_Point   mouse;
-    uint32_t    mouse_state;
+    uint32_t    mouse_buttons[4];
+	SDL_Point	mouse_delta;
+
+	uint8_t		keyboard[SDL_NUM_SCANCODES];
 }   SDLX_Input;
 
 typedef struct SDLX_Time

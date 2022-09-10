@@ -1,7 +1,7 @@
 #include "SDLX/SDLX.h"
 
-static SDLX_Display display;
-void 			SDLX_Background_Set(SDL_Texture *bg) {display.background = bg;}
+static	SDLX_Display display;
+void 	SDLX_BackgroundSet(SDL_Texture *bg) {display.background = bg;}
 
 void	SDLX_Close(void)
 {
@@ -13,7 +13,7 @@ void	SDLX_Close(void)
 	SDL_Quit();
 }
 
-static void		SDLX_Display_Set(char *name, int x, int y, int h, int w, int flags)
+static void		SDLX_DisplaySet(char *name, int x, int y, int h, int w, int flags)
 {
     SDL_Window *window;
 
@@ -29,7 +29,7 @@ static void		SDLX_Display_Set(char *name, int x, int y, int h, int w, int flags)
     display.win_h = h;
 }
 
-void	        SDLX_Start(char *name, int x, int y, int h, int w, int flags)
+void SDLX_InitDefault()
 {
 	if (!SDL_WasInit(0))
 		SDL_Init(SDL_INIT_EVERYTHING);
@@ -38,13 +38,35 @@ void	        SDLX_Start(char *name, int x, int y, int h, int w, int flags)
         SDL_Log("TTF initialized");
         display.defaultFont = TTF_OpenFont(DEFAULT_FONT_PATH, DEFAULT_FONT_SIZE);
     }
-    
-	SDLX_Display_Set(name, x, y, h, w, flags);
-    SDLX_RenderQueues_Init();
+
+	SDLX_DisplaySet(
+		DEFAULT_WIN_NAME,
+        DEFAULT_WIN_X,
+		DEFAULT_WIN_Y,
+        DEFAULT_WIN_H,
+		DEFAULT_WIN_W,
+        DEFAULT_SDL_FLAG
+	);
+    SDLX_RenderQueuesInit();
 	atexit(SDLX_Close);
 }
 
-SDLX_Display	*SDLX_Display_Get(void) 
+void	SDLX_Init(char *name, int x, int y, int h, int w, int flags)
+{
+	if (!SDL_WasInit(0))
+		SDL_Init(SDL_INIT_EVERYTHING);
+    if (!TTF_WasInit() && !TTF_Init())
+    {
+        SDL_Log("TTF initialized");
+        display.defaultFont = TTF_OpenFont(DEFAULT_FONT_PATH, DEFAULT_FONT_SIZE);
+    }
+
+	SDLX_DisplaySet(name, x, y, h, w, flags);
+    SDLX_RenderQueuesInit();
+	atexit(SDLX_Close);
+}
+
+SDLX_Display	*SDLX_DisplayGet(void)
 {
     if (!display.renderer)
         return NULL;

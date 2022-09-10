@@ -8,7 +8,7 @@ typedef struct _internal_Queues
 
 static _intern_Queues queues;
 
-void SDLX_RenderQueues_Init()
+void SDLX_RenderQueuesInit()
 {
 	uint32_t i;
 
@@ -22,7 +22,7 @@ void SDLX_RenderQueues_Init()
 		++i;
 	}
 	queues.count = DEFAULT_QUEUES_COUNT;
-} 
+}
 
 
 void 		SDLX_RenderAll(SDLX_Display *display)
@@ -49,21 +49,22 @@ void 		SDLX_RenderAll(SDLX_Display *display)
 				current->sprites[n]->flip
 			);
 			++n;
-		} 
+		}
 		++i;
 	}
 }
 
 void 		SDLX_RenderOne(uint32_t id);
 
-void        SDLX_Render_Reset(SDLX_Display *display)
+void        SDLX_RenderReset(SDLX_Display *display)
 {
 	SDL_RenderClear(display->renderer);
 	SDL_SetRenderDrawColor(display->renderer, 0, 0, 0, 0);
-	SDL_RenderCopy(display->renderer, display->background, NULL, NULL);
+	if (display->background)
+		SDL_RenderCopy(display->renderer, display->background, NULL, NULL);
 }
 
-void		SDLX_RenderQueue_Push(SDLX_Sprite *sprite)
+void		SDLX_RenderQueuePush(SDLX_Sprite *sprite)
 {
 	SDLX_RenderQueue *current;
 
@@ -80,7 +81,7 @@ void		SDLX_RenderQueue_Push(SDLX_Sprite *sprite)
 	}
 }
 
-void		SDLX_RenderQueue_FlushAll()
+void		SDLX_RenderQueueFlushAll()
 {
 	uint32_t i;
 
@@ -92,15 +93,15 @@ void		SDLX_RenderQueue_FlushAll()
 	}
 }
 
-void        SDLX_RenderQueue_Flush(uint32_t id)
+void        SDLX_RenderQueueFlush(uint32_t id)
 {
 	if (queues.count < id)
 		queues.queues[id].size = 0;
 }
 
-uint32_t    SDLX_RenderQueue_Create(SDL_bool isSorted);
+uint32_t    SDLX_RenderQueueCreate(SDL_bool isSorted);
 
-SDLX_RenderQueue *SDLX_RenderQueue_Get(uint32_t id)
+SDLX_RenderQueue *SDLX_RenderQueueGet(uint32_t id)
 {
 	if (id < queues.count)
 		return &queues.queues[id];
@@ -110,7 +111,7 @@ SDLX_RenderQueue *SDLX_RenderQueue_Get(uint32_t id)
 
 // 0 if renderered, 1 if error
 
-void SDLX_RenderMessage_Aligned(SDLX_Display *display, int x_align, int y_align, SDL_Color color, char *text)
+void SDLX_RenderMessageAligned(SDLX_Display *display, int x_align, int y_align, SDL_Color color, char *text)
 {
 	SDL_Surface *surf;
 	SDL_Rect 	dst;
@@ -139,7 +140,7 @@ void SDLX_RenderMessage_Aligned(SDLX_Display *display, int x_align, int y_align,
 	SDL_RenderCopy(display->renderer, SDL_CreateTextureFromSurface(display->renderer, surf),
 		NULL, &dst);
 	SDL_FreeSurface(surf);
-}	
+}
 
 void SDLX_RenderMessage(SDLX_Display *display, SDL_Rect *dst, SDL_Color color, char *text)
 {
@@ -150,4 +151,4 @@ void SDLX_RenderMessage(SDLX_Display *display, SDL_Rect *dst, SDL_Color color, c
 	SDL_RenderCopy(display->renderer, SDL_CreateTextureFromSurface(display->renderer, surf),
 		NULL, dst);
 	SDL_FreeSurface(surf);
-}	
+}
