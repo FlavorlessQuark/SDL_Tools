@@ -48,6 +48,14 @@ enum {
 };
 
 
+enum {
+	SDLX_FOCUS_ENTER = 1,
+	SDLX_FOCUS_LEAVE,
+	SDLX_FOCUS_STAY,
+	SDLX_SELECTED
+};
+
+
 # ifndef MAX
 #  define MAX(a, b)\
 	({ 	__typeof__ (a) _a = (a);\

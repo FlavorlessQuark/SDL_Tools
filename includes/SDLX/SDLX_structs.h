@@ -79,6 +79,19 @@ typedef struct SDLX_Time
     uint32_t    frame_count;
 }   SDLX_Time;
 
+typedef struct SDLX_Button
+{
+	SDL_Rect _boundingBox;
+	SDL_Rect *boundingBox;
+
+	int state;
+	int triggered;
+	int enabled;
+
+	void *data;
+
+}	SDLX_Button;
+
 typedef struct SDLX_Circle
 {
     SDL_Point   center;

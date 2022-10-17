@@ -61,6 +61,11 @@ SDLX_Time 	SDLX_TimeGet(void);
 int			SDLX_TimedLoop(int (*game_loop)(void *), void *args);
 int			SDLX_PointInCircle(SDL_Point point, SDLX_Circle circle);
 
+
+// buttons
+void SDLX_ButtonUpdate();
+void SDLX_ButtonCreate (SDLX_Button *dest, SDL_Rect *boundingBox,  void *data);
+
 //Maybe put dbeug in its own header to be included separately
 /**
  * SDLX debug functions
