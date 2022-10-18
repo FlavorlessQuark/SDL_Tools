@@ -13,7 +13,7 @@
 
 #include "SDL2/SDL.h"
 
-typedef struct SDLX_Display
+ typedef struct SDLX_Display
 {
     SDL_Window      *window;
     SDL_Renderer    *renderer;
@@ -88,6 +88,7 @@ typedef struct SDLX_Button
 	int triggered;
 	int enabled;
 
+	struct SDLX_Button *neighbours[4];
 	void *data;
 
 }	SDLX_Button;
