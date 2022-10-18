@@ -89,8 +89,6 @@ typedef struct SDLX_Button
 	int enabled;
 
 	struct SDLX_Button *neighbours[4];
-	void *data;
-
 }	SDLX_Button;
 
 typedef struct SDLX_Circle

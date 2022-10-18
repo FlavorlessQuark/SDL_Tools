@@ -24,8 +24,8 @@ int main()
 	SDLX_InputMap(SDLX_KEYBOARDTYPE, SDL_SCANCODE_SPACE, SDL_SCANCODE_SPACE);
 	SDLX_InputMap(SDLX_KEYBOARDTYPE, SDL_SCANCODE_P, SDL_SCANCODE_SPACE);
 
-	SDLX_ButtonCreate(&button, &rect, NULL);
-	SDLX_ButtonCreate(&button2, &rect2, NULL);
+	SDLX_ButtonCreate(&button, &rect);
+	SDLX_ButtonCreate(&button2, &rect2);
 	SDLX_ButtonSet_Keys(
 		SDL_SCANCODE_LEFT,
 		SDL_SCANCODE_RIGHT,

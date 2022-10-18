@@ -29,7 +29,7 @@ void SDLX_ButtonSet_Keys(int left, int right, int up, int down, int select)
 	keys[SELECT] = select;
 }
 
-void SDLX_ButtonCreate (SDLX_Button *dest, SDL_Rect *boundingBox,  void *data)
+void SDLX_ButtonCreate (SDLX_Button *dest, SDL_Rect *boundingBox)
 {
 	if (size >= capacity)
 	{
@@ -43,7 +43,6 @@ void SDLX_ButtonCreate (SDLX_Button *dest, SDL_Rect *boundingBox,  void *data)
 	else
 		dest->boundingBox = boundingBox;
 
-	dest->data = data;
 	dest->state = SDLX_NONE;
 	dest->enabled = SDL_TRUE;
 	dest->triggered = SDL_FALSE;
@@ -78,18 +77,19 @@ void SDLX_ButtonUpdate()
 	}
 
 	i = 0;
+	// TODO: Only do bit things on unsigned types :)
 	while (i < size)
 	{
 		buttons[i]->state = ((buttons[i]->state & 1) << 1);
 		buttons[i]->triggered = ((buttons[i]->triggered & 1) << 1);
 		mouseOver = SDL_PointInRect(&input.mouse, buttons[i]->boundingBox);
 
-		if (mouseOver || buttons[i] == currentFocus)
+		if (buttons[i]->enabled == SDL_TRUE && (mouseOver || buttons[i] == currentFocus))
 		{
 			buttons[i]->state += 1;
 
-			if (currentFocus)
-				currentFocus->triggered <<= 1;
+			// if (currentFocus != buttons[i])
+			// 	currentFocus->triggered <<= 1;
 
 			currentFocus = buttons[i];
 			// >:) hehe
