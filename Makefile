@@ -14,6 +14,7 @@ BIN_DIR = bin/
 
 SDLX_NAMES = 			\
 	SDLX_buttons		\
+	SDLX_containers		\
 	SDLX_init			\
 	SDLX_input			\
 	SDLX_render			\
