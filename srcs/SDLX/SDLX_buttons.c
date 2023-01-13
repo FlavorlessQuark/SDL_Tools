@@ -67,7 +67,7 @@ void SDLX_ButtonUpdate()
 
 	while(i < 4)
 	{
-		if (currentFocus && SDLX_GetKeyState(keys[i]) == SDLX_KEYDOWN && currentFocus->neighbours[i] != NULL)
+		if (currentFocus && keys[i] != -1 && SDLX_GetKeyState(keys[i]) == SDLX_KEYDOWN && currentFocus->neighbours[i] != NULL)
 		{
 			// SDL_Log("Here %d", i);
 			currentFocus = currentFocus->neighbours[i];
