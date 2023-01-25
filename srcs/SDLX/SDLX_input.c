@@ -71,13 +71,14 @@ void SDLX_BuildMouseInput(void)
 	newMouseState = SDL_GetMouseState(&_intern_input.mouse.x, &_intern_input.mouse.y);
 	SDL_GetRelativeMouseState(&_intern_input.mouse_delta.x, &_intern_input.mouse_delta.y);
 
+	// There may not be
 	mouse[SDL_BUTTON_LEFT] = (newMouseState & SDL_BUTTON_LMASK) >> (SDL_BUTTON_LEFT - 1);
 	mouse[SDL_BUTTON_MIDDLE] = (newMouseState & SDL_BUTTON_MMASK) >> (SDL_BUTTON_MIDDLE - 1);
 	mouse[SDL_BUTTON_RIGHT] = (newMouseState & SDL_BUTTON_RMASK)  >> (SDL_BUTTON_RIGHT - 1) ;
 
-	_intern_input.mouse_buttons[SDL_BUTTON_LEFT] = ((_intern_input.mouse_buttons[SDL_BUTTON_LEFT] & 1) << 1) + mouse[SDL_BUTTON_LEFT];
-	_intern_input.mouse_buttons[SDL_BUTTON_MIDDLE] = ((_intern_input.mouse_buttons[SDL_BUTTON_MIDDLE]) & 1 << 1) + mouse[SDL_BUTTON_MIDDLE];
-	_intern_input.mouse_buttons[SDL_BUTTON_RIGHT] = ((_intern_input.mouse_buttons[SDL_BUTTON_RIGHT] & 1)<< 1) + mouse[SDL_BUTTON_RIGHT];
+	_intern_input.mouse_buttons[SDL_BUTTON_LEFT]   = ((_intern_input.mouse_buttons[SDL_BUTTON_LEFT]  & 1) << 1) + mouse[SDL_BUTTON_LEFT];
+	_intern_input.mouse_buttons[SDL_BUTTON_MIDDLE] = ((_intern_input.mouse_buttons[SDL_BUTTON_MIDDLE]& 1) << 1) + mouse[SDL_BUTTON_MIDDLE];
+	_intern_input.mouse_buttons[SDL_BUTTON_RIGHT]  = ((_intern_input.mouse_buttons[SDL_BUTTON_RIGHT] & 1) << 1) + mouse[SDL_BUTTON_RIGHT];
 
 	// SDL_Log("Left %d, Mid %d, Right %d",
 	// 	_intern_input.mouse_buttons[SDL_BUTTON_LEFT],
