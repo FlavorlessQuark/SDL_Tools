@@ -13,6 +13,7 @@ SRCS_DIR = srcs/
 BIN_DIR = bin/
 
 SDLX_NAMES = 			\
+	SDLX_button_config	\
 	SDLX_buttons		\
 	SDLX_containers		\
 	SDLX_init			\
@@ -22,7 +23,7 @@ SDLX_NAMES = 			\
 
 SRCS_NAMES =								\
 	$(addprefix $(SDLX_DIR), $(SDLX_NAMES))	\
-	main 				\
+	test 				\
 
 SRCS = $(addprefix $(SRCS_DIR), $(addsuffix .c, $(SRCS_NAMES)))
 OBJS = $(addprefix $(BIN_DIR), $(SRCS:.c=.o))
