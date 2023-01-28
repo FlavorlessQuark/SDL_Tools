@@ -63,13 +63,13 @@ int main()
 	SDLX_InputMap(SDLX_KEYBOARDTYPE, SDL_SCANCODE_P, SDL_SCANCODE_SPACE);
 
 	SDLX_ButtonCreate(&button, &rect);
-	SDLX_ButtonCreate(&button2, &rect2);
-	SDLX_ButtonSet_Keys(
-		SDL_SCANCODE_LEFT,
-		SDL_SCANCODE_RIGHT,
-		SDL_SCANCODE_UP,
-		SDL_SCANCODE_DOWN,
-		SDL_SCANCODE_SPACE);
+	// SDLX_ButtonCreate(&button2, &rect2);
+	// SDLX_ButtonSet_Keys(
+	// 	SDL_SCANCODE_LEFT,
+	// 	SDL_SCANCODE_RIGHT,
+	// 	SDL_SCANCODE_UP,
+	// 	SDL_SCANCODE_DOWN,
+	// 	SDL_SCANCODE_SPACE);
 
 	rect.w = DEFAULT_WIN_W / 4;
 	rect.h = DEFAULT_WIN_H / 4;
@@ -81,8 +81,8 @@ int main()
 	rect2.x = (DEFAULT_WIN_W / 2) - (rect2.w / 2);
 	rect2.y = (DEFAULT_WIN_H / 2) - (rect2.h / 2) + rect2.h;
 
-	SDLX_ButtonSet_Neighbours(&button, NULL, NULL, &button2, &button2);
-	SDLX_ButtonSet_Neighbours(&button2, NULL, NULL, &button, &button);
+	// SDLX_ButtonSet_Neighbours(&button, NULL, NULL, &button2, &button2);
+	// SDLX_ButtonSet_Neighbours(&button2, NULL, NULL, &button, &button);
 
 	container.alignDirection = SDLX_ALIGN_VERTICAL;
 	container.alignment = SDLX_CENTER_ALIGN;
@@ -100,6 +100,8 @@ int main()
 	// SDL_Log("Box 1 %p => %p", &rect, container.elems[0].boundingBox);
 	SDL_Log("Box 1 (%d,%d) | w: %d, h: %d", rect.x, rect.y, rect.w, rect.h);
 	SDL_Log("Box 2 (%d,%d) | w: %d, h: %d", rect2.x, rect2.y, rect2.w, rect2.h);
+	int prevS = -1;
+	int prevT = -1;
 
 	while (1)
 	{
@@ -116,13 +118,18 @@ int main()
 							   255,
 							   255);
 		SDL_RenderFillRect(display->renderer, &rect);
-
-		SDL_SetRenderDrawColor(display->renderer,
-							   255 * (button2.triggered),
-							   255 * (button2.state == SDLX_FOCUS_STAY),
-							   255,
-							   255);
-		SDL_RenderFillRect(display->renderer, &rect2);
+		if (button.triggered != prevT)
+			SDL_Log("Triggered %d", button.triggered);
+		if (button.state != prevS)
+			SDL_Log("state %d", button.state);
+		prevT = button.triggered;
+		prevS = button.state;
+		// SDL_SetRenderDrawColor(display->renderer,
+		// 					   255 * (button2.triggered),
+		// 					   255 * (button2.state == SDLX_FOCUS_STAY),
+		// 					   255,
+		// 					   255);
+		// SDL_RenderFillRect(display->renderer, &rect2);
 		SDL_SetRenderDrawColor(display->renderer,
 							   255,
 							   0,
