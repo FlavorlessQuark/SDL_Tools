@@ -13,12 +13,11 @@ void SDLX_RenderQueuesInit()
 	uint32_t i;
 
 	i = 0;
-	queues.queues = SDL_calloc(DEFAULT_QUEUES_COUNT, sizeof(SDLX_RenderQueue));
+	queues.queues = SDL_malloc((DEFAULT_QUEUES_COUNT*sizeof(SDLX_RenderQueue)) + (DEFAULT_QUEUES_COUNT * (DEFAULT_QUEUE_SIZE*sizeof(SDLX_Sprite *))));
 	while (i < DEFAULT_QUEUES_COUNT)
 	{
-		queues.queues[i].sprites = SDL_calloc(DEFAULT_QUEUE_SIZE, sizeof(SDLX_Sprite *));
-		queues.queues[i].capacity = DEFAULT_QUEUE_SIZE;
-		queues.queues[i].size = 0;
+		queues.queues[i * DEFAULT_QUEUE_SIZE].capacity = DEFAULT_QUEUE_SIZE;
+		queues.queues[i * DEFAULT_QUEUE_SIZE].size = 0;
 		++i;
 	}
 	queues.count = DEFAULT_QUEUES_COUNT;
