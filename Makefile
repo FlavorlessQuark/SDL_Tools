@@ -13,8 +13,8 @@ SRCS_DIR = srcs/
 BIN_DIR = bin/
 
 SDLX_NAMES = 			\
-	SDLX_button_config	\
 	SDLX_buttons		\
+	SDLX_containers_utils\
 	SDLX_containers		\
 	SDLX_init			\
 	SDLX_input			\

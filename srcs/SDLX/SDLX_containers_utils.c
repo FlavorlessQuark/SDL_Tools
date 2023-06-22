@@ -31,8 +31,12 @@
 
 
 
+
 // You may use tabs to align children with their parent
 //  containers and elements will be parented to the container that came before
+
+# define NUMS	"-0123456789"
+
 int	extract_num(char *str, int *number)
 {
 	int spn;
@@ -149,7 +153,7 @@ char *parse_object(SDLX_RectContainer *current,SDLX_RectContainer *parent, char 
 
 }
 
-SDLX_RectContainer *parse_UIConfig(char *filename)
+SDLX_RectContainer *SDLX_ParseConfig(char *filename)
 {
 	SDLX_RectContainer *parent;
 	char *file;
@@ -163,6 +167,45 @@ SDLX_RectContainer *parse_UIConfig(char *filename)
 	SDL_free(file);
 
 	return parent;
+}
+
+
+void SDLX_DisplayConfig(SDL_Renderer *renderer, SDLX_RectContainer *root)
+{
+	SDL_SetRenderDrawColor(renderer, 255, 0,0,255);
+	SDL_RenderDrawRect(renderer, root->self.boundingBox);
+
+	for (int i = 0; i < root->containerCount; i++)
+		SDLX_DisplayConfig(renderer, &root->containers[i]);
+
+	SDL_SetRenderDrawColor(renderer, 255, 255, 255,255);
+	for (int x = 0; x < root->elemCount; x++)
+	{
+		SDL_RenderDrawRect(renderer, root->elems[x].boundingBox);
+	}
+	SDL_SetRenderDrawColor(renderer, 0, 0,0,255);
+}
+
+SDLX_RectContainer *SDLX_LoadConfig(char *filename)
+{
+	SDLX_RectContainer *root;
+
+	root = SDLX_ParseConfig(filename);
+	SDLX_ContainerUpdate(root, NULL);
+
+
+	return root;
+}
+
+
+void SDLX_CleanupConfig(SDLX_RectContainer *container)
+{
+	for (int i = 0; i < container->containerCount; i++)
+		SDLX_CleanupConfig(&container->containers[i]);
+	if (container->containerCount > 0)
+		SDL_free(container->containers);
+	if (container->elemCount > 0)
+		SDL_free(container->elems);
 }
 
 
