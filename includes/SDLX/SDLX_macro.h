@@ -5,8 +5,8 @@
 # define DEFAULT_WIN_NAME "Default"
 # define DEFAULT_WIN_X SDL_WINDOWPOS_CENTERED
 # define DEFAULT_WIN_Y SDL_WINDOWPOS_CENTERED
-# define DEFAULT_WIN_H 500
-# define DEFAULT_WIN_W 500
+# define DEFAULT_WIN_W 1920
+# define DEFAULT_WIN_H 1080
 
 // Render queue macros
 
@@ -22,6 +22,7 @@
 
 
 // Text macros
+
 # define DEFAULT_FONT_SIZE 20
 # define DEFAULT_FONT_COLOR (SDL_Color){255, 255, 255}
 # define DEFAULT_FONT_PATH "./srcs/SDLX/default.ttf"

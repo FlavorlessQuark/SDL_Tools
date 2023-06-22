@@ -1,35 +1,22 @@
 #include "../includes/SDLX/SDLX.h"
 
-
 int main()
 {
-	SDLX_Display *display;
 	SDLX_RectContainer *root;
-
+	SDLX_Display *display;
 
 	SDLX_InitDefault();
-	display = SDLX_DisplayGet();
 	root = SDLX_LoadConfig("examples/simple_container_config");
 
-
-	// RunInputTests();
-	SDLX_InputMap(SDLX_KEYBOARDTYPE, SDL_SCANCODE_UP, SDL_SCANCODE_UP);
-	SDLX_InputMap(SDLX_KEYBOARDTYPE, SDL_SCANCODE_W, SDL_SCANCODE_UP);
-	SDLX_InputMap(SDLX_KEYBOARDTYPE, SDL_SCANCODE_DOWN, SDL_SCANCODE_DOWN);
-	SDLX_InputMap(SDLX_KEYBOARDTYPE, SDL_SCANCODE_S, SDL_SCANCODE_DOWN);
-	SDLX_InputMap(SDLX_KEYBOARDTYPE, SDL_SCANCODE_LEFT, SDL_SCANCODE_LEFT);
-	SDLX_InputMap(SDLX_KEYBOARDTYPE, SDL_SCANCODE_A, SDL_SCANCODE_LEFT);
-	SDLX_InputMap(SDLX_KEYBOARDTYPE, SDL_SCANCODE_RIGHT, SDL_SCANCODE_RIGHT);
-	SDLX_InputMap(SDLX_KEYBOARDTYPE, SDL_SCANCODE_D, SDL_SCANCODE_RIGHT);
-	SDLX_InputMap(SDLX_KEYBOARDTYPE, SDL_SCANCODE_SPACE, SDL_SCANCODE_SPACE);
-	SDLX_InputMap(SDLX_KEYBOARDTYPE, SDL_SCANCODE_P, SDL_SCANCODE_SPACE);
-
+	// cleanupUIConfig(root);
+	display = SDLX_DisplayGet();
 
 	while (1)
 	{
-		SDLX_RenderReset(display);
+		SDLX_RenderReset(display->renderer);
 		SDLX_InputLoop();
 		SDLX_DisplayConfig(display->renderer ,root);
 		SDL_RenderPresent(display->renderer);
 	}
+	SDLX_RenderQueuesCleanup();
 }

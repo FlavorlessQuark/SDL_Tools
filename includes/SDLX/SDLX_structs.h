@@ -18,6 +18,7 @@
     SDL_Window      *window;
     SDL_Renderer    *renderer;
     SDL_Texture     *background;
+	SDL_Color		bgColor;
 
     TTF_Font        *defaultFont;
 
@@ -124,5 +125,12 @@ typedef struct SDLX_Circle
     SDL_Point   center;
     int         radius;
 }   SDLX_Circle;
+
+typedef struct SDLX_TextSheet
+{
+	SDL_Texture *tex;
+	SDL_Rect next;
+	int maxW, maxH;
+}				SDLX_TextSheet;
 
 #endif
