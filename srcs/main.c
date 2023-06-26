@@ -13,7 +13,7 @@ int main()
 
 	while (1)
 	{
-		SDLX_RenderReset(display->renderer);
+		SDLX_RenderReset(display);
 		SDLX_InputLoop();
 		SDLX_DisplayConfig(display->renderer ,root);
 		SDL_RenderPresent(display->renderer);
