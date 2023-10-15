@@ -44,8 +44,8 @@ The config format is as follows
 // Elements are leaf node, they have no children
 //
 //  First line MUST describes a container
-//  Container: x,y,w%,h%|wType,hType,margin|alignDir,alignType
-//  Element:   x,y,w%,h%|wType,hType,margin
+//  Container: x,y,w%,h%|margin|alignDir,alignType
+//  Element:   x,y,w%,h%|margin
 //  c[amount] : container x amount
 //  e[amount] : elem x amount
 //
